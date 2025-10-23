@@ -1,0 +1,145 @@
+# MythicMobs-Time Configuration
+# Auto boss spawning system by GenzStore
+
+# CẤU HÌNH HƯỚNG DẪN CHI TIẾT:
+
+# 1. Cấu hình cơ bản:
+#   - mythicmob: Tên MythicMob trong MythicMobs (có thể là string hoặc list) (bắt buộc)
+#   - world: Tên world để spawn boss (bắt buộc)
+#   - x, y, z: Tọa độ spawn (bắt buộc)
+#   - schedule: Lịch trình (có thể là string hoặc list) (bắt buộc)
+#   - timezone: Timezone cho lịch trình (mặc định: "Asia/Ho_Chi_Minh")
+#   - title, subtitle: Tin nhắn title khi boss spawn (hỗ trợ màu &)
+#   - messages: Danh sách tin nhắn chat (hỗ trợ placeholders)
+#   - sound: Sound effect khi boss spawn (từ Minecraft Sound enum)
+#   - priority: Độ ưu tiên khi có nhiều boss cùng lúc (số càng nhỏ càng ưu tiên)
+#   - killAll: Xóa tất cả boss khi spawn boss mới (mặc định: false)
+
+# 2. PlaceholderAPI placeholders (yêu cầu PlaceholderAPI plugin):
+#   - %mythicmobstime_boss_next_<boss_id>% : Thời gian đến lần spawn tiếp theo
+#   - %mythicmobstime_boss_next_name_<boss_id>% : Tên hiển thị của boss từ MythicMob (với màu)
+#   - %mythicmobstime_boss_status_<boss_id>% : Trạng thái boss (Alive/Dead)
+#   - %mythicmobstime_boss_count% : Tổng số boss đã config
+#   Ví dụ: %mythicmobstime_boss_next_final_boss%, %mythicmobstime_boss_status_dragon_boss%
+
+# Debug mode for development
+debug: false
+
+# Lưu ý: Ngày trong lịch trình dùng tiếng Việt: Thu2, Thu3, Thu4, Thu5, Thu6, Thu7, ChuNhat
+# Ví dụ: Thu7-14:00, ChuNhat-20:30, Thu4-21:00
+
+# Boss schedule configuration
+boss_schedule:
+  # Boss với single schedule
+  final_boss:
+    mythicmob: "Final_Boss"
+    world: "world"
+    x: 100
+    y: 64
+    z: 200
+    schedule: "ChuNhat-20:00"
+    timezone: "Asia/Ho_Chi_Minh"
+    title: "&4⚠ &cBOSS XUẤT HIỆN &4⚠"
+    subtitle: "&6%boss_name% &eđã xuất hiện!"
+    messages:
+      - "&6[Boss] &eBoss &f%boss_name% &eđã xuất hiện tại &b%world%!"
+      - "&eVị trí: &b%world% &f(&a%x%&f, &a%y%&f, &a%z%&f)"
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    priority: 1
+    
+  # Boss với single schedule khác
+  dragon_boss:
+    mythicmob: "Ancient_Dragon"
+    world: "world_nether"
+    x: 0
+    y: 70
+    z: 0
+    schedule: "Thu7-15:00"
+    timezone: "Asia/Ho_Chi_Minh"
+    title: "&4🐉 &cDRAGON XUẤT HIỆN &4🐉"
+    subtitle: "&6%boss_name% &eđã xuất hiện!"
+    messages:
+      - "&6[Boss] &e%boss_name% &fđã xuất hiện tại &b%world%!"
+      - "&eHãy nhanh chóng tiêu diệt nó để nhận phần thưởng!"
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    priority: 2
+    
+  # Boss với multiple schedules (spawn vào nhiều khung giờ)
+  elite_guardian:
+    mythicmob: "Elite_Guardian"
+    world: "world_the_end"
+    x: 0
+    y: 65
+    z: 0
+    schedule:
+      - "Thu7-14:00"      # Thứ Bảy 14:00
+      - "ChuNhat-16:00"   # Chủ Nhật 16:00
+      - "Thu4-21:00"      # Thứ Tư 21:00
+    timezone: "Asia/Ho_Chi_Minh"
+    title: "&4🛡️ &cELITE GUARDIAN XUẤT HIỆN &4🛡️"
+    subtitle: "&6%boss_name% &eđã xuất hiện!"
+    messages:
+      - "&6[Boss] &e%boss_name% &fđã xuất hiện tại &b%world%!"
+      - "&eBoss này có nhiều khung giờ spawn khác nhau!"
+      - "&eVị trí: &b%world% &f(&a%x%&f, &a%y%&f, &a%z%&f)"
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    priority: 3
+
+  # Boss với multiple mythicmobs (chọn ngẫu nhiên từ danh sách)
+  random_boss:
+    mythicmob:
+      - "Random_Boss_1"
+      - "Random_Boss_2"
+      - "Random_Boss_3"
+    world: "world"
+    x: 100
+    y: 64
+    z: 200
+    schedule: "Thu7-18:00"
+    timezone: "Asia/Ho_Chi_Minh"
+    title: "&4🎲 &cRANDOM BOSS XUẤT HIỆN &4🎲"
+    subtitle: "&6%boss_name% &eđã xuất hiện!"
+    messages:
+      - "&6[Boss] &eBoss ngẫu nhiên &f%boss_name% &eđã xuất hiện tại &b%world%!"
+      - "&eVị trí: &b%world% &f(&a%x%&f, &a%y%&f, &a%z%&f)"
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    priority: 4
+    killAll: true  # Xóa tất cả boss khi spawn boss này
+
+  # Boss với killAll: false (mặc định - chỉ xóa boss cùng loại)
+  normal_boss:
+    mythicmob: "Normal_Boss"
+    world: "world"
+    x: 0
+    y: 64
+    z: 0
+    schedule: "Thu7-19:00"
+    timezone: "Asia/Ho_Chi_Minh"
+    title: "&4⚔ &cNORMAL BOSS XUẤT HIỆN &4⚔"
+    subtitle: "&6%boss_name% &eđã xuất hiện!"
+    messages:
+      - "&6[Boss] &e%boss_name% &fđã xuất hiện tại &b%world%!"
+      - "&eVị trí: &b%world% &f(&a%x%&f, &a%y%&f, &a%z%&f)"
+    sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    priority: 5
+    killAll: false  # Chỉ xóa boss cùng loại (mặc định)
+
+# Broadcast settings
+broadcast:
+  enabled: true
+  title_duration:
+    fade_in: 20    # Thời gian fade in (ticks)
+    stay: 100     # Thời gian hiển thị (ticks)
+    fade_out: 30  # Thời gian fade out (ticks)
+
+# Auto cleanup settings
+cleanup:
+  enabled: true
+  check_interval: 300  # 5 minutes in seconds
+  
+# Database settings (for future expansion)
+database:
+  enabled: false
+  type: "sqlite"
+  file: "boss_data.db"
+

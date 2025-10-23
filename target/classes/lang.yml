@@ -1,0 +1,36 @@
+# MythicMobs-Time Language File
+# Tất cả tin nhắn và ngôn ngữ của plugin
+
+# Command messages
+commands:
+  no_permission: "&cBạn không có quyền sử dụng lệnh này!"
+  reload_success: "&aĐã reload config thành công!"
+  list_header: "&6&lDANH SÁCH BOSS &7- &eTổng cộng: %count%"
+  boss_info: "&e%id% &7- &f%mob% &7- &a%schedule%"
+  force_usage: "&cSử dụng: /mmtime force <boss_id>"
+  force_success: "&aĐã force spawn boss: %id%"
+  boss_not_found: "&cKhông tìm thấy boss với ID: %id%"
+  help_header: "&6&lMythicMobs-Time &7- &eHệ thống boss tự động"
+  help_reload: "&e/mmtime reload &7- Reload config"
+  help_list: "&e/mmtime list &7- Liệt kê boss đã config"
+  help_force: "&e/mmtime force <boss_id> &7- Force spawn boss"
+  help_help: "&e/mmtime help &7- Hiện thị trợ giúp"
+
+# Boss spawn messages
+boss_spawn:
+  title: "&4⚠ &cBOSS XUẤT HIỆN &4⚠"
+  subtitle: "&6%boss_name% &eđã xuất hiện!"
+  broadcast: "&6[Boss] &e%boss_name% &fđã xuất hiện tại &b%world% &f(&a%x%&f, &a%y%&f, &a%z%&f)"
+  sound: "ENTITY_ENDER_DRAGON_GROWL"
+
+# Error messages
+errors:
+  world_not_found: "&cWorld '%world%' không t t tồn tại cho boss: %id%"
+  mythicmob_not_found: "&cMythicMob '%mob%' không t t tồn tại!"
+  spawn_failed: "&cKhông thể spawn boss: %id%"
+  config_invalid: "&cConfig không hợp lệ cho boss: %id%"
+  schedule_invalid: "&cLịch trình không hợp lệ: %schedule%"
+  location_invalid: "&cVị trí spawn không hợp lệ!"
+  cleanup_failed: "&cKhông thể cleanup boss cũ!"
+  boss_already_exists: "&cBoss đã t tồn tại trong world!"
+  boss_not_alive: "&cBoss không còn t tồn tại!"
